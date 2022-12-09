@@ -67,14 +67,16 @@ export default function BookModal(props) {
       return alert("please fill all the fields");
     }
 
-    if (step === 1) {
+    if (step === STEPS.PRODUCT_SELECTION) {
       const totalDays = getTotalDays(formValue.fromDate, formValue.toDate);
       const minRentDay = selectedProduct?.info?.minimum_rent_period;
       if (totalDays && totalDays < selectedProduct?.info?.minimum_rent_period) {
         return alert(`Minimun Rent Period is ${minRentDay}`);
       }
       setStep(step + 1);
-    } else {
+    }
+
+    if (step === STEPS.PRODUCT_ESTIMATION) {
       handleClose();
       storeInBookedList(
         selectedProduct.info,
