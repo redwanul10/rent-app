@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import dayjs from "dayjs";
-import DatePIcker from "../../../global/components/fields/DatePicker";
 import Select from "../../../global/components/Select";
+import DatePIcker from "../../../global/components/DatePicker";
 
 const TODAY_DATE = dayjs();
 
