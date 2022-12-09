@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+thead.MuiTableHead-root.css-15wwp11-MuiTableHead-root th {
+  background: #439a97;
+  color: white;
+  font-weight: bold;
+}

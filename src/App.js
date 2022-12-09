@@ -1,22 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+// import RentTable from "./components/RentTable";
+import Grid from "@mui/material/Grid";
+import Home from "./pages/Home";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Grid container spacing={2} justifyContent="center">
+          <Grid item xs={8}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Home />
+            </LocalizationProvider>
+          </Grid>
+        </Grid>
       </header>
     </div>
   );
