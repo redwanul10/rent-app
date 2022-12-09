@@ -2,13 +2,13 @@ import React, { useMemo, useState } from "react";
 import Paper from "@mui/material/Paper";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import data from "../../data.json";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import BookModal from "./components/BookModal";
 import SortableTable from "../../global/components/Table";
 import ReturnModal from "./components/ReturnModal";
+import { useGlobalState } from "../../StateProvider";
 
 const columns = [
   { id: "sl", label: "SL" },
@@ -39,6 +39,7 @@ const columns = [
 ];
 
 export default function Home(props) {
+  const products = useGlobalState();
   const [search, setSearch] = useState("");
   const [modals, setModals] = useState({
     bookModal: false,
@@ -60,13 +61,13 @@ export default function Home(props) {
 
   const searchedProduct = useMemo(
     () =>
-      data.filter(
+      products.filter(
         (product) =>
           product?.name
             ?.toLocaleLowerCase()
             .indexOf(search.toLocaleLowerCase()) !== -1
       ),
-    [search]
+    [search, products]
   );
 
   return (
@@ -133,13 +134,13 @@ export default function Home(props) {
       <BookModal
         open={modals.bookModal}
         onClose={() => handleClose("bookModal")}
-        data={data}
+        data={products}
       />
 
       <ReturnModal
         open={modals.returnModal}
         onClose={() => handleClose("returnModal")}
-        data={data}
+        data={products}
       />
     </Paper>
   );
