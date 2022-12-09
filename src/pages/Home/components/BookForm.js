@@ -46,8 +46,8 @@ export default function BookForm(props) {
             label="From"
             value={formValue.fromDate}
             onChange={(e) => {
-              handleChange(e, "fromDate");
               handleChange(e, "toDate");
+              handleChange(e, "fromDate");
             }}
             minDate={TODAY_DATE}
           />
@@ -58,7 +58,8 @@ export default function BookForm(props) {
             label="To"
             value={formValue.toDate}
             onChange={(e) => handleChange(e, "toDate")}
-            minDate={TODAY_DATE}
+            // minDate={TODAY_DATE}
+            minDate={formValue.fromDate}
           />
         </Grid>
       </Grid>
