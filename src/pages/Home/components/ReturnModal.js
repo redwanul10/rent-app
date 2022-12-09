@@ -38,9 +38,7 @@ export default function ReturnModal(props) {
 
   const [formValue, setFormValue] = useState(INITIAL_VALUE);
 
-  const handleChange = (newValue, key) => {
-    setFormValue({ ...formValue, [key]: newValue });
-  };
+  const handleChange = (newValue, key) => {};
 
   const [selectedProduct, setSelectedProduct] = useState({
     name: "default",
@@ -68,11 +66,6 @@ export default function ReturnModal(props) {
     }
 
     if (step === 1) {
-      const totalDays = getTotalDays(formValue.fromDate, formValue.toDate);
-      const minRentDay = selectedProduct?.info?.minimum_rent_period;
-      if (totalDays && totalDays < selectedProduct?.info?.minimum_rent_period) {
-        return alert(`Minimun Rent Period is ${minRentDay}`);
-      }
       setStep(step + 1);
     } else {
       handleClose();
