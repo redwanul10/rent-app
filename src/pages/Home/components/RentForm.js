@@ -4,8 +4,7 @@ import Select from "../../../global/components/Select";
 import TextField from "@mui/material/TextField";
 
 export default function RentForm(props) {
-  const { selectedProduct, handleSelect, data, formValue, handleChange } =
-    props;
+  const { selectedProduct, handleSelect, data, handleChange } = props;
 
   return (
     <>

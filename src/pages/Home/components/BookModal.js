@@ -37,40 +37,32 @@ export default function BookModal(props) {
   const [step, setStep] = useState(1);
 
   const [formValue, setFormValue] = useState(INITIAL_VALUE);
+  const selectedProduct = data[formValue.selectedProduct] || {};
 
   const handleChange = (newValue, key) => {
     setFormValue({ ...formValue, [key]: newValue });
   };
 
-  const [selectedProduct, setSelectedProduct] = useState({
-    name: "default",
-    info: {},
-  });
-
   const handleClose = () => {
     setStep(1);
     onClose();
     setFormValue(INITIAL_VALUE);
-    setSelectedProduct({
-      name: "default",
-      info: {},
-    });
   };
 
   const handleSelect = (event) => {
     var index = event.target.value;
-    setSelectedProduct({ name: event.target.value, info: data[index] });
+    handleChange(index, "selectedProduct");
   };
 
   const handleProceed = () => {
-    if (!formValue.fromDate || !formValue.toDate || !selectedProduct.info) {
+    if (!formValue.fromDate || !formValue.toDate || !selectedProduct.name) {
       return alert("please fill all the fields");
     }
 
     if (step === STEPS.PRODUCT_SELECTION) {
       const totalDays = getTotalDays(formValue.fromDate, formValue.toDate);
-      const minRentDay = selectedProduct?.info?.minimum_rent_period;
-      if (totalDays && totalDays < selectedProduct?.info?.minimum_rent_period) {
+      const minRentDay = selectedProduct?.minimum_rent_period;
+      if (totalDays && totalDays < selectedProduct?.minimum_rent_period) {
         return alert(`Minimun Rent Period is ${minRentDay}`);
       }
       setStep(step + 1);
@@ -79,7 +71,7 @@ export default function BookModal(props) {
     if (step === STEPS.PRODUCT_ESTIMATION) {
       handleClose();
       storeInBookedList(
-        selectedProduct.info,
+        selectedProduct,
         formValue.fromDate,
         getTotalDays(formValue.fromDate, formValue.toDate)
       );
@@ -112,7 +104,7 @@ export default function BookModal(props) {
             <ProductEstimation
               fromDate={formValue.fromDate}
               toDate={formValue.toDate}
-              price={selectedProduct.info.price}
+              price={selectedProduct?.price}
             />
           )}
 

@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import dayjs from "dayjs";
 import ProductEstimation from "./ProductEstimation";
-import { getTotalDays } from "../utils";
 import RentForm from "./RentForm";
 
 const style = {

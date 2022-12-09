@@ -16,7 +16,7 @@ export default function BookForm(props) {
     props;
 
   const { booked } = useGlobalState();
-  const currentProductBookedList = booked[selectedProduct?.info?.code] || {};
+  const currentProductBookedList = booked[selectedProduct?.code] || {};
 
   const renderDay = (day, _value, DayComponentProps) => {
     const formatedDate = day.format("DD/MM/YYYY");
@@ -24,9 +24,9 @@ export default function BookForm(props) {
     return (
       <>
         {isBooked ? (
-          <BookedDay day={day.get("D")} />
+          <BookedDay key={day} day={day.get("D")} />
         ) : (
-          <PickersDay {...DayComponentProps} onClick={() => {}} />
+          <PickersDay key={day} {...DayComponentProps} onClick={() => {}} />
         )}
       </>
     );
@@ -39,7 +39,7 @@ export default function BookForm(props) {
           <Select
             label="Select Product"
             defaultValue="none"
-            value={selectedProduct.name}
+            value={formValue.selectedProduct}
             onChange={handleSelect}
             options={data}
           />
@@ -53,10 +53,10 @@ export default function BookForm(props) {
             mb={2}
           >
             <Typography fontWeight={600} color="#3A8891">
-              Price: {selectedProduct?.info?.price || 0}
+              Price: {selectedProduct?.price || 0}
             </Typography>
             <Typography fontWeight={600} color="#3A8891">
-              Min Rent Period: {selectedProduct?.info?.minimum_rent_period || 0}
+              Min Rent Period: {selectedProduct?.minimum_rent_period || 0}
             </Typography>
           </Box>
         </Grid>
