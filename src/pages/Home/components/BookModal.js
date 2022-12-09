@@ -33,7 +33,7 @@ const INITIAL_VALUE = {
 };
 
 export default function BookModal(props) {
-  const { open, onClose, data } = props;
+  const { open, onClose, data, storeInBookedList } = props;
   const [step, setStep] = useState(1);
 
   const [formValue, setFormValue] = useState(INITIAL_VALUE);
@@ -76,6 +76,11 @@ export default function BookModal(props) {
       setStep(step + 1);
     } else {
       handleClose();
+      storeInBookedList(
+        selectedProduct.info,
+        formValue.fromDate,
+        getTotalDays(formValue.fromDate, formValue.toDate)
+      );
     }
   };
 

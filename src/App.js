@@ -1,11 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
-// import RentTable from "./components/RentTable";
 import Grid from "@mui/material/Grid";
 import Home from "./pages/Home";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import StateProvider from "./StateProvider";
+import StateProvider from "./GlobalProvider";
 
 function App() {
   return (

@@ -5,12 +5,32 @@ import Grid from "@mui/material/Grid";
 import dayjs from "dayjs";
 import Select from "../../../global/components/Select";
 import DatePIcker from "../../../global/components/DatePicker";
+import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+import { useGlobalState } from "../../../GlobalProvider";
+import BookedDay from "./BookedDay";
 
 const TODAY_DATE = dayjs();
 
 export default function BookForm(props) {
   const { selectedProduct, handleSelect, data, formValue, handleChange } =
     props;
+
+  const { booked } = useGlobalState();
+  const currentProductBookedList = booked[selectedProduct?.info?.code] || {};
+
+  const renderDay = (day, _value, DayComponentProps) => {
+    const formatedDate = day.format("DD/MM/YYYY");
+    const isBooked = currentProductBookedList[formatedDate] || null;
+    return (
+      <>
+        {isBooked ? (
+          <BookedDay day={day.get("D")} />
+        ) : (
+          <PickersDay {...DayComponentProps} onClick={() => {}} />
+        )}
+      </>
+    );
+  };
 
   return (
     <>
@@ -50,6 +70,7 @@ export default function BookForm(props) {
               handleChange(e, "fromDate");
             }}
             minDate={TODAY_DATE}
+            renderDay={renderDay}
           />
         </Grid>
 
@@ -58,12 +79,12 @@ export default function BookForm(props) {
             label="To"
             value={formValue.toDate}
             onChange={(e) => handleChange(e, "toDate")}
-            // minDate={TODAY_DATE}
             minDate={formValue.fromDate}
+            renderDay={renderDay}
           />
         </Grid>
       </Grid>
-      {/* <Box mt={1} display="flex" flexDirection="row" alignItems="center">
+      <Box mt={1} display="flex" flexDirection="row" alignItems="center">
         <Box
           style={{
             width: 15,
@@ -74,7 +95,7 @@ export default function BookForm(props) {
           }}
         />
         <Typography>Booked</Typography>
-      </Box> */}
+      </Box>
     </>
   );
 }

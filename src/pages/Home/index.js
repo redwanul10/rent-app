@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import BookModal from "./components/BookModal";
 import SortableTable from "../../global/components/Table";
 import ReturnModal from "./components/ReturnModal";
-import { useGlobalState } from "../../StateProvider";
+import { useGlobalState } from "../../GlobalProvider";
 
 const columns = [
   { id: "sl", label: "SL" },
@@ -39,7 +39,7 @@ const columns = [
 ];
 
 export default function Home(props) {
-  const products = useGlobalState();
+  const { products, storeInBookedList } = useGlobalState();
   const [search, setSearch] = useState("");
   const [modals, setModals] = useState({
     bookModal: false,
@@ -135,6 +135,7 @@ export default function Home(props) {
         open={modals.bookModal}
         onClose={() => handleClose("bookModal")}
         data={products}
+        storeInBookedList={storeInBookedList}
       />
 
       <ReturnModal
